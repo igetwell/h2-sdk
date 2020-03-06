@@ -13,7 +13,7 @@ allprojects {
 dependencies {
     ...
     // 心率/卡路里 sdk
-    implementation 'com.github.igetwell:h2-sdk:0.0.2-Alpha'
+    implementation 'com.github.igetwell:h2-sdk:1.0.0'
     //注意 需要 RxJava+RxAndroid 配合使用
     implementation 'io.reactivex.rxjava2:rxjava:2.2.1'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'

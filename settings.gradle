@@ -1,0 +1,2 @@
+include ':app', ':h2_sdk'
+rootProject.name='H2Demo'

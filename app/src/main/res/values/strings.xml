@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">H2Demo</string>
+
+    <string-array name="ble_errors">
+        <item>当前蓝牙正常</item>
+        <item>当前手机不支持蓝牙</item>
+        <item>当前手机未开启蓝牙</item>
+        <item>无蓝牙权限</item>
+        <item>无蓝牙权限,请打开蓝牙权限</item>
+        <item>无蓝牙权限,权限被禁止</item>
+        <item>未知异常</item>
+    </string-array>
+
+    <string name="query">开始搜索</string>
+    <string name="stop_query">停止搜索</string>
+
+    <string name="v_ppi">屏幕ppi : %d</string>
+
+
+</resources>

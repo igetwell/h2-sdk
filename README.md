@@ -14,7 +14,7 @@ dependencies {
     ...
     implementation 'com.github.igetwell:h2-sdk:0.0.2-Alpha'
 }
-
+```
 Usage
 -----
 ``` Java
@@ -52,3 +52,10 @@ Usage
                 });
          // 关闭连接       
          // h2Bluetooth.disconnect();       
+```
+
+Callback.class
+-----
+status 0 佩戴异常, 1-正常数据
+hr 心率
+kcal 卡路里 (千卡)

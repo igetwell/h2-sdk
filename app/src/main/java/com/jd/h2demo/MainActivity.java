@@ -19,7 +19,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.jd.h2demo.adapters.T1Adapter;
 import com.jd.h2demo.beans.BleDevice;
@@ -28,7 +30,11 @@ import com.jd.h2demo.listeners.OnItemT1DeviceListener;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements OnItemT1DeviceListener {
+public class MainActivity extends AppCompatActivity {
+
+    public static void d(String msg){
+        Log.d("H2", msg);
+    }
 
     ActivityMainBinding binding;
 
@@ -87,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements OnItemT1DeviceLis
         this.binding.rv1.setLayoutManager(manager);
 
         t1Adapter = new T1Adapter();
-        t1Adapter.setListener(this);
+        //t1Adapter.setListener(this);
         this.binding.rv1.setAdapter(t1Adapter);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -139,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements OnItemT1DeviceLis
             //LogUtils.d("已存在相同的设备信息");
             return;
         }
+        d("onBluetoothDeviceChanged = "+device.getName() +"  addr = "+device.getAddress());
 //        if(device.getName() == null || !device.getName().startsWith("GW_") ){
 //            LogUtils.d("非T1设备信息");
 //            return;
@@ -154,8 +161,7 @@ public class MainActivity extends AppCompatActivity implements OnItemT1DeviceLis
         this.binding.setBle(this.bleAvailable);
     }
 
-
-    public void onBeginClick(View view){
+    public void onQueryClick(View view){
         //task.beginData();
         if(bleAvailable != 0)return;
         if(bluetoothAdapter == null)return;
@@ -166,24 +172,32 @@ public class MainActivity extends AppCompatActivity implements OnItemT1DeviceLis
         bluetoothAdapter.startDiscovery();
     }
 
+    public void onBeginClick(View view){
+        if(t1Adapter == null)return;
+        //if(t1Adapter.getArray() == null)return;
+        if(t1Adapter.getSelected().size() <= 0){
+            Toast.makeText(this,"请选择",Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(t1Adapter.getSelected().size() <= 1){
+            Toast.makeText(this,"数量不够",Toast.LENGTH_LONG).show();
+            return;
+        }
+        open(t1Adapter.getSelected().get(0),t1Adapter.getSelected().get(1));
+    }
+
     public void onStopClick(View view){
         if(bluetoothAdapter == null)return;
         if(!bluetoothAdapter.isDiscovering())return;
         bluetoothAdapter.cancelDiscovery();
     }
 
-    @Override
-    public void onItemClick(View view, BleDevice device) {
-        onStopClick(null);
-        if(device.name.startsWith("GW_H2")){
-            open(device);
-            return;
-        }
-    }
 
-    void open(BleDevice device){
+
+    void open(BleDevice device,BleDevice device2){
         Intent intent = new Intent(this,H2Activity.class);
         intent.putExtra(H2Activity.EXTRA_T1,device);
+        intent.putExtra(H2Activity.EXTRA_T2,device2);
         startActivity(intent);
     }
 

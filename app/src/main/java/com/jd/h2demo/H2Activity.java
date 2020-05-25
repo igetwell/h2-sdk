@@ -28,6 +28,8 @@ public class H2Activity extends AppCompatActivity {
 
     public static final String EXTRA_T1 = "extra_t1_info";
 
+    public static final String EXTRA_T2 = "extra_t2_info";
+
     ActivityH2Binding binding;
 
     @Override
@@ -39,11 +41,48 @@ public class H2Activity extends AppCompatActivity {
 
     H2Bluetooth h2Bluetooth;
 
+    H2Bluetooth h2Bluetooth2;
+
     void onAfter(){
         //Blead
         BleDevice bleDevice = getIntent().getParcelableExtra(EXTRA_T1);
+        BleDevice bleDevice2 = getIntent().getParcelableExtra(EXTRA_T2);
 
         h2Bluetooth = new H2Bluetooth.Builder()
+                .setContext(this)
+                .setAge(20) // 年龄
+                .setSex(1)  // 性别, 0 男, 1,女
+                .setWeight(55) // 体重
+                .setAddress(bleDevice2.address) // 心率设备Mac地址
+                .build();
+
+        h2Bluetooth.connect()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Callback>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Callback callback) {
+                        binding.setCallback2(callback);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
+        h2Bluetooth2 = new H2Bluetooth.Builder()
                 .setContext(this)
                 .setAge(20) // 年龄
                 .setSex(1)  // 性别, 0 男, 1,女
@@ -51,7 +90,7 @@ public class H2Activity extends AppCompatActivity {
                 .setAddress(bleDevice.address) // 心率设备Mac地址
                 .build();
 
-        h2Bluetooth.connect()
+        h2Bluetooth2.connect()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Callback>() {

@@ -6,6 +6,10 @@
             name="callback"
             type="com.jd.h2.beans.Callback" />
 
+        <variable
+            name="callback2"
+            type="com.jd.h2.beans.Callback" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -50,6 +54,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_hr_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/oswald_regular"
@@ -70,10 +75,9 @@
             android:text="@{String.valueOf(callback.kcal),default=0000}"
             android:textColor="#FFF"
             android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="@id/v_bg"
-            app:layout_constraintBottom_toBottomOf="@id/v_bg"
-            app:layout_constraintLeft_toRightOf="@id/ic_jd_log"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_hr_unit"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/ic_jd_log"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -84,8 +88,63 @@
             android:textColor="#FFF"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/tv_kcal"
-            app:layout_constraintLeft_toRightOf="@id/ic_jd_log"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/ic_jd_log"
+            />
+
+        <!-- 第二个设备 -->
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_hr_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oswald_regular"
+            android:text="@{String.valueOf(callback2.hr),default=00}"
+            android:textColor="#FFF"
+            android:textSize="64sp"
+            app:layout_constraintTop_toTopOf="@id/v_bg"
+            app:layout_constraintBottom_toBottomOf="@id/v_bg"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/ic_jd_log"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_hr_2_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oswald_regular"
+            android:text="bpm"
+            android:textColor="#FFF"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_hr"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/ic_jd_log"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_kcal_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oswald_regular"
+            android:text="@{String.valueOf(callback2.kcal),default=0000}"
+            android:textColor="#FFF"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_hr_unit"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/ic_jd_log"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oswald_regular"
+            android:text="kcal"
+            android:textColor="#FFF"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_kcal_2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/ic_jd_log"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

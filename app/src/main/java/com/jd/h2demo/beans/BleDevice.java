@@ -14,6 +14,8 @@ public class BleDevice implements Parcelable {
 
     public String address;
 
+    public boolean selected;
+
     public BleDevice(){
 
     }

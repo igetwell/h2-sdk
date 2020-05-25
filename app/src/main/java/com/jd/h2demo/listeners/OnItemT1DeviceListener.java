@@ -10,5 +10,5 @@ import com.jd.h2demo.beans.BleDevice;
  */
 public interface OnItemT1DeviceListener {
 
-    void onItemClick(View view, BleDevice device);
+    void onItemClick(View view, int position);
 }

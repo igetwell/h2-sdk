@@ -210,6 +210,7 @@ public class H2BluetoothController {
         CaloriesParams params = new CaloriesParams(age,sex,weight,heartRate);
         //double calories = caloriesParser.getCalories(params);
         float calories = H2Parser.calories(params.sex,params.age,params.weight.floatValue(),params.hr,params.exerciseType,params.smo2,params.speed,params.slope);
+        calories = calories * 2;
         BigDecimal b = new BigDecimal(calories);
         calories = b.setScale(4,BigDecimal.ROUND_HALF_UP).floatValue();
         WzLog.d("状态 : "+status+" 心率 : "+heartRate+" 卡路里 : "+calories);

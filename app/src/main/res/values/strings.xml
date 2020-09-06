@@ -16,5 +16,7 @@
 
     <string name="v_ppi">屏幕ppi : %d</string>
 
+    <string name="total_value">总kcal: %f</string>
+    <string name="cur_value">当前kcal: %f</string>
 
 </resources>

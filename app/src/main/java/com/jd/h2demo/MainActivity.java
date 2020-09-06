@@ -69,7 +69,13 @@ public class MainActivity extends AppCompatActivity {
      * 校验蓝牙权限
      */
     private void checkBluetoothPermission(){
-        if (Build.VERSION.SDK_INT >= 23){
+        // 10 需要精度定位权限
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                setBleAvailable(3);
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE_REQUEST_PERMISSIONS);
+            }
+        }else if(Build.VERSION.SDK_INT >= 23){
             //校验是否已具有模糊定位权限
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
                 setBleAvailable(3);

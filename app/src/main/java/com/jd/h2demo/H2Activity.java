@@ -32,6 +32,8 @@ public class H2Activity extends AppCompatActivity {
 
     ActivityH2Binding binding;
 
+    float totalValue;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +69,8 @@ public class H2Activity extends AppCompatActivity {
 
                     @Override
                     public void onNext(Callback callback) {
+                        totalValue += callback.kcal;
+                        binding.setTotal(totalValue);
                         binding.setCallback2(callback);
                     }
 

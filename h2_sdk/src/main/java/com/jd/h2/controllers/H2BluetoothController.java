@@ -99,6 +99,10 @@ public class H2BluetoothController {
                     return;
                 }
                 WzLog.e("设备连接异常!!!");
+                if(gatt != null){
+                    gatt.disconnect();
+                    gatt.close();
+                }
                 emitter.onError(new ConnectException("H2 设备连接异常!!!"));
                 emitter.onComplete();
             }

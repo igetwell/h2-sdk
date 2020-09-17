@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import com.jd.h2.H2Bluetooth;
 import com.jd.h2.H2Parser;
 import com.jd.h2.beans.Callback;
+import com.jd.h2.utils.WzLog;
 import com.jd.h2demo.databinding.ActivityH22Binding;
 
 import java.text.SimpleDateFormat;
@@ -51,6 +52,10 @@ public class H2DemoActivity extends AppCompatActivity {
                 .setAddress(address) // 心率设备Mac地址
                 .build();
 
+        connect();
+    }
+
+    void connect(){
         h2Bluetooth2.connect()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -69,8 +74,34 @@ public class H2DemoActivity extends AppCompatActivity {
                         float total = binding.getTotal2() + (callback.kcal == null ? 0 : callback.kcal);
                         binding.setTotal2(total);
                         binding.setValue2(callback.kcal);
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        onRxTimer();
+                    }
 
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    void onRxTimer(){
+        Observable.timer(5,TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+                        WzLog.d("正在重新连接...");
+                        connect();
                     }
 
                     @Override
